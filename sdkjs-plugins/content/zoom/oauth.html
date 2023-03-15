@@ -24,10 +24,10 @@
         (function () {
             function parseLocation() {
                 try {
-                    var matches = document.location.href.match(new RegExp("code=([^&]*)"));
-                    if (matches && matches[1] && matches[2]) {
-                        window.opener.OAuthCallback(matches[1], matches[2]);
-                    } else {
+                    if (document.location.href.indexOf("code=") != -1) {
+                        window.opener.OAuthCallback(document.location.href.slice(document.location.href.indexOf("code=") + 'code='.length));
+                    }
+                    else {
                         window.opener.OAuthError("Not found token code");
                     }
                 } finally {

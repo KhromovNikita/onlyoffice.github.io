@@ -24,12 +24,11 @@
         (function () {
             function parseLocation() {
                 try {
-                    var matches = document.location.hash.match(new RegExp("code=([^&]*)"));
-                    console.log('Here blyat');
+                    var matches = document.location.href.match(new RegExp("code=([^&]*)"));
                     if (matches && matches[1] && matches[2]) {
                         window.opener.OAuthCallback(matches[1], matches[2]);
                     } else {
-                        window.opener.OAuthError(document);
+                        window.opener.OAuthError("Not found token code");
                     }
                 } finally {
                     window.close();

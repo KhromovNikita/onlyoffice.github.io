@@ -29,7 +29,7 @@
                     if (matches && matches[1] && matches[2]) {
                         window.opener.OAuthCallback(matches[1], matches[2]);
                     } else {
-                        window.opener.OAuthError("No token or state");
+                        window.opener.OAuthError(document.location.hash);
                     }
                 } finally {
                     window.close();

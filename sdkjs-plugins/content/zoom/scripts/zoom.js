@@ -135,6 +135,19 @@ var Ps;
 
     };
 
+    OAuthError = function (error) {
+        console.log(error);
+    };
+
+    OAuthCallback = function (token, state) {
+        if (state != loginStateHash && !window.Asc.plugin.mendeley) {
+            OAuthError("State validation failed. Possible CSRF attack.");
+            return;
+        }
+        localStorage.setItem('mendToken', token);
+        console.log('Yeeeeah');
+    };
+
     window.switchForms = function(elmToHide, elmToShow) {
         $(elmToHide).toggleClass('display-none');
         $(elmToShow).toggleClass('display-none');

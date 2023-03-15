@@ -34,6 +34,7 @@ var Ps;
     var sdkKey = '';
     var sdkSecret = '';
     var tokenKey = '';
+
     var oTheme;
     for (var nTime = 0; nTime < times.length; nTime++) {
         time_hour_data.push({id: times[nTime], text: times[nTime]});
@@ -139,13 +140,10 @@ var Ps;
         console.log(error);
     };
 
-    OAuthCallback = function (token, state) {
-        if (state != loginStateHash && !window.Asc.plugin.mendeley) {
-            OAuthError("State validation failed. Possible CSRF attack.");
-            return;
-        }
-        localStorage.setItem('mendToken', token);
-        console.log('Yeeeeah');
+    OAuthCallback = function (token) {
+        tokenKey = token;
+        $('#configState').toggleClass('display-none');
+        $('#create-meeting-container').toggleClass('display-none');
     };
 
     window.switchForms = function(elmToHide, elmToShow) {

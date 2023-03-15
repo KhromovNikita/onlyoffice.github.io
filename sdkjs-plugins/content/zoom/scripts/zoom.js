@@ -182,7 +182,13 @@ var Ps;
 		});
 
         $('#saveConfigBtn').click(function() {
-            SaveCredentials(true);
+            // SaveCredentials(true);
+
+            let host = window.document.location.origin + window.document.location.pathname;
+            host = host.replace('index', 'oauth');
+            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=qjPj4A67TNaw8LFApKSyYA&redirect_uri=${host}`;
+            
+            var wnd = window.open(link, null, "width=500,height=700");
         });
         $('#topic-value').focus(function(){
             if(this.value !== this.defaultValue){

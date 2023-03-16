@@ -148,7 +148,6 @@ var Ps;
     function GetAccessToken(authorizationCode) {
         $.ajax({
             method: 'POST',
-            contentType: "application/json",
             data: JSON.stringify({
                 "code": authorizationCode,
                 "redirect_uri": "https://khromovnikita.github.io/onlyoffice.github.io/sdkjs-plugins/content/zoom/oauth.html"

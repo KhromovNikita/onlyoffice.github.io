@@ -1,4 +1,5 @@
-SIGNATURE_SERVER = "https://zoom.onlyoffice.com/sign";
+//SIGNATURE_SERVER = "https://zoom.onlyoffice.com/sign";
+SIGNATURE_SERVER = "http://127.0.0.1:5000/";
 
 window.addEventListener('DOMContentLoaded', function(event) {
   console.log('DOM fully loaded and parsed');
@@ -128,11 +129,16 @@ function websdkready() {
           url: SIGNATURE_SERVER
 
       }).success(function (oResponse) {
-          meetingConfig.signature = oResponse;
-          meetingConfig.sdkKey = SDK_KEY;
-          var joinUrl = document.location.protocol + "//" + document.location.host + document.location.pathname.replace("index_zoom.html", "meeting.html?") + testTool.serialize(meetingConfig);
-          window.parent.openMeeting(joinUrl);
-          showLoader(false);
+        if (oResponse["sign"] == null) {
+          alert(oResponse);
+          return;
+        }
+
+        meetingConfig.signature = oResponse["sign"];
+        meetingConfig.sdkKey = SDK_KEY;
+        var joinUrl = document.location.protocol + "//" + document.location.host + document.location.pathname.replace("index_zoom.html", "meeting.html?") + testTool.serialize(meetingConfig);
+        window.parent.openMeeting(joinUrl);
+        showLoader(false);
       }).error(function(oResponse) {
           alert('Server error. Contact to support.');
           showLoader(false);

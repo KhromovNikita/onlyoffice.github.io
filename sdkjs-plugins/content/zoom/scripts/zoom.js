@@ -34,6 +34,7 @@ var Ps;
     var sdkKey = '';
     var sdkSecret = '';
     var tokenKey = '';
+    var refresh_token = '';
 
     var oTheme;
     for (var nTime = 0; nTime < times.length; nTime++) {
@@ -142,7 +143,6 @@ var Ps;
 
     OAuthCallback = function(code) {
         GetAccessToken(code);
-        //IsValidConfigData();
     };
 
     function GetAccessToken(authorizationCode) {
@@ -156,7 +156,11 @@ var Ps;
             }),
             url: "http://127.0.0.1:5000/"
         }).success(function (oResponse) {
-            console.log(oResponse);
+            tokenKey = oResponse["access_token"]; 
+            refresh_token = oResponse["refresh_token"];
+
+            if (tokenKey)
+                IsValidConfigData();
 
         }).error(function(e){
             console.log(e);

@@ -148,18 +148,12 @@ var Ps;
     function GetAccessToken(authorizationCode) {
         $.ajax({
             method: 'POST',
-            contentType: "application/x-www-form-urlencoded",
-            headers: {
-                "Host": "zoom.us",
-                "Authorization": 'Basic ' + btoa('qjPj4A67TNaw8LFApKSyYA:putD67eofdx1n6zRTIfXUJCuJMUtjaUk'),
-                "Content-Type": "application/x-www-form-urlencoded"
-            } ,
+            contentType: "application/json",
             data: {
                 "code": authorizationCode,
-                "grant_type": "authorization_code",
                 "redirect_uri": "https://khromovnikita.github.io/onlyoffice.github.io/sdkjs-plugins/content/zoom/oauth.html"
             },
-            url: "https://zoom.us/oauth/token"
+            url: "http://127.0.0.1:5000/"
         }).success(function (oResponse) {
             console.log(oResponse);
 

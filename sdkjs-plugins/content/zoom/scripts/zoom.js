@@ -140,10 +140,9 @@ var Ps;
         console.log(error);
     };
 
-    OAuthCallback = function (token) {
+    async function OAuthCallback (token) {
         tokenKey = token;
-        $('#configState').toggleClass('display-none');
-        $('#create-meeting-container').toggleClass('display-none');
+        await IsValidConfigData();
     };
 
     window.switchForms = function(elmToHide, elmToShow) {

@@ -131,6 +131,7 @@ function websdkready() {
       }).success(function (oResponse) {
         meetingConfig.signature = oResponse;
         meetingConfig.sdkKey = SDK_KEY;
+        
         var joinUrl = document.location.protocol + "//" + document.location.host + document.location.pathname.replace("index_zoom.html", "meeting.html?") + testTool.serialize(meetingConfig);
         window.parent.openMeeting(joinUrl);
         showLoader(false);

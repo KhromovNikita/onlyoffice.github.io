@@ -140,9 +140,9 @@ var Ps;
         console.log(error);
     };
 
-    async function OAuthCallback (token) {
+    OAuthCallback = function(token) {
         tokenKey = token;
-        await IsValidConfigData();
+        IsValidConfigData();
     };
 
     window.switchForms = function(elmToHide, elmToShow) {

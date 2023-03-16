@@ -164,8 +164,8 @@ var Ps;
                 return;
             }
 
-            tokenKey = oResponse["access_token"]; 
-            refresh_token = oResponse["refresh_token"];
+            tokenKey = oRes["access_token"]; 
+            refresh_token = oRes["refresh_token"];
 
             if (tokenKey)
                 IsValidConfigData();

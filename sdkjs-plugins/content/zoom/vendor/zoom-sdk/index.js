@@ -129,12 +129,7 @@ function websdkready() {
           url: SIGNATURE_SERVER
 
       }).success(function (oResponse) {
-        if (oResponse["sign"] == null) {
-          alert(oResponse);
-          return;
-        }
-
-        meetingConfig.signature = oResponse["sign"];
+        meetingConfig.signature = oResponse;
         meetingConfig.sdkKey = SDK_KEY;
         var joinUrl = document.location.protocol + "//" + document.location.host + document.location.pathname.replace("index_zoom.html", "meeting.html?") + testTool.serialize(meetingConfig);
         window.parent.openMeeting(joinUrl);

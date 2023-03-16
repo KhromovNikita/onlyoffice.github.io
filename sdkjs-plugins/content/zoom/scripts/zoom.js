@@ -140,10 +140,33 @@ var Ps;
         console.log(error);
     };
 
-    OAuthCallback = function(token) {
-        tokenKey = token;
-        IsValidConfigData();
+    OAuthCallback = function(code) {
+        GetAccessToken(code);
+        //IsValidConfigData();
     };
+
+    function GetAccessToken(authorizationCode) {
+        $.ajax({
+            method: 'POST',
+            contentType: "application/x-www-form-urlencoded",
+            headers: {
+                "Host": "zoom.us",
+                "Authorization": 'Basic ' + btoa('qjPj4A67TNaw8LFApKSyYA:putD67eofdx1n6zRTIfXUJCuJMUtjaUk'),
+                "Content-Type": "application/x-www-form-urlencoded"
+            } ,
+            data: {
+                "code": authorizationCode,
+                "grant_type": "authorization_code",
+                "redirect_uri": "https://khromovnikita.github.io/onlyoffice.github.io/sdkjs-plugins/content/zoom/oauth.html"
+            },
+            url: "https://zoom.us/oauth/token"
+        }).success(function (oResponse) {
+            console.log(oResponse);
+
+        }).error(function(e){
+            console.log(e);
+        });
+    }
 
     window.switchForms = function(elmToHide, elmToShow) {
         $(elmToHide).toggleClass('display-none');

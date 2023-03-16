@@ -149,13 +149,21 @@ var Ps;
         $.ajax({
             method: 'POST',
             contentType: "application/json",
-            dataType: "text/plain",
             data: JSON.stringify({
                 "code": authorizationCode,
                 "redirect_uri": "https://khromovnikita.github.io/onlyoffice.github.io/sdkjs-plugins/content/zoom/oauth.html"
             }),
             url: "http://127.0.0.1:5000/"
         }).success(function (oResponse) {
+            let oRes;
+            try {
+                oRes = JSON.parse(oResponse);
+            }
+            catch {
+                alert(oResponse);
+                return;
+            }
+
             tokenKey = oResponse["access_token"]; 
             refresh_token = oResponse["refresh_token"];
 

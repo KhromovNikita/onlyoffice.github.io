@@ -35,6 +35,7 @@ var Ps;
     var sdkSecret = '';
     var tokenKey = '';
     var refresh_token = '';
+    var userId = '';
 
     var oTheme;
     for (var nTime = 0; nTime < times.length; nTime++) {
@@ -226,7 +227,7 @@ var Ps;
 
             let host = window.document.location.origin + window.document.location.pathname;
             host = host.replace('index', 'oauth1');
-            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=qFweh7H8QaSn5eWQcxgg5w&redirect_uri=${host}`;
+            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=N11tS3PdQn2V8Spg6t9RKg&redirect_uri=${host}`;
             
             var wnd = window.open(link, null, "width=500,height=700");
         });
@@ -391,18 +392,15 @@ var Ps;
             }),
             url: zoomProxyUrl
         }).success(function (oResponse) {
-            localStorage.setItem($('#emailField').attr("data-id"), email);
-            localStorage.setItem($('#sdkKeyField').attr("data-id"), sdkKey);
-            localStorage.setItem($('#sdkSecretField').attr("data-id"), sdkSecret);
             localStorage.setItem($('#tokenKeyField').attr("data-id"), tokenKey);
 
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {
-                alert('Invalid access (JWT) token!');
+                alert('Invalid access token!');
                 showLoader(elements, false);
                 return;
             }
             else if (oResponse.message && oResponse.message.search("Access token is expired") != -1) {
-                alert("Access token (JWT) is expired.");
+                alert("Need reauthorization.");
                 showLoader(elements, false);
                 return;
             }

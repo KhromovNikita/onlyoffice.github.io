@@ -29,7 +29,7 @@ function websdkready() {
   // ZoomMtg.setZoomJSLib('http://localhost:9999/node_modules/@zoomus/websdk/dist/lib', '/av'); // Local version default, Angular Project change to use cdn version
   ZoomMtg.preLoadWasm(); // pre download wasm file to save time.
 
-  var SDK_KEY, SDK_SECRET;
+  var SDK_KEY;
 
   /**
    * NEVER PUT YOUR ACTUAL API SECRET IN CLIENT SIDE CODE, THIS IS JUST FOR QUICK PROTOTYPING
@@ -97,9 +97,6 @@ function websdkready() {
   // click join meeting button
   window.joinMeeting = function () {
       showLoader(true);
-      SDK_KEY = localStorage.getItem('zoom-sdk-key') || "";
-      SDK_SECRET = SDK_SECRET = localStorage.getItem('zoom-sdk-secret') || "";
-
       var meetingConfig = testTool.getMeetingConfig();
       if (!meetingConfig.mn || !meetingConfig.name) {
         showLoader(false);
@@ -123,8 +120,6 @@ function websdkready() {
           data: JSON.stringify({
             'meet_number': meetingConfig.mn,
             'role_id': meetingConfig.role,
-            'sdk_key': SDK_KEY,
-            'sdk_secret': SDK_SECRET
           }),
           url: SIGNATURE_SERVER
 
@@ -141,6 +136,7 @@ function websdkready() {
       })
   };
 
+
   function copyToClipboard(elementId) {
     var aux = document.createElement("input");
     aux.setAttribute("value", document.getElementById(elementId).getAttribute('link'));
@@ -152,9 +148,6 @@ function websdkready() {
     
   // click copy jon link button
   window.copyJoinLink = function (element) {
-    SDK_KEY = localStorage.getItem('zoom-sdk-key') || "";
-      SDK_SECRET = SDK_SECRET = localStorage.getItem('zoom-sdk-secret') || "";
-
       var meetingConfig = testTool.getMeetingConfig();
       if (!meetingConfig.mn || !meetingConfig.name) {
         alert("Meeting ID or Your Name is empty");
@@ -177,8 +170,6 @@ function websdkready() {
           data: JSON.stringify({
               'meet_number': meetingConfig.mn,
               'role_id': meetingConfig.role,
-              'sdk_key': SDK_KEY,
-              'sdk_secret': SDK_SECRET
           }),
 			    url: SIGNATURE_SERVER
 

@@ -29,7 +29,7 @@ function websdkready() {
   // ZoomMtg.setZoomJSLib('http://localhost:9999/node_modules/@zoomus/websdk/dist/lib', '/av'); // Local version default, Angular Project change to use cdn version
   ZoomMtg.preLoadWasm(); // pre download wasm file to save time.
 
-  var SDK_KEY;
+  var CLIENT_ID = 'qFweh7H8QaSn5eWQcxgg5w';
 
   /**
    * NEVER PUT YOUR ACTUAL API SECRET IN CLIENT SIDE CODE, THIS IS JUST FOR QUICK PROTOTYPING
@@ -125,7 +125,7 @@ function websdkready() {
 
       }).success(function (oResponse) {
         meetingConfig.signature = oResponse;
-        meetingConfig.sdkKey = SDK_KEY;
+        meetingConfig.sdkKey = CLIENT_ID;
         
         var joinUrl = document.location.protocol + "//" + document.location.host + document.location.pathname.replace("index_zoom.html", "meeting.html?") + testTool.serialize(meetingConfig);
         window.parent.openMeeting(joinUrl);
@@ -175,7 +175,7 @@ function websdkready() {
 
       }).success(function (oResponse) {
           meetingConfig.signature = oResponse;
-          meetingConfig.sdkKey = SDK_KEY;
+          meetingConfig.sdkKey = CLIENT_ID;
           var joinUrl = document.location.protocol + "//" + document.location.host + document.location.pathname.replace("index_zoom.html", "meeting.html?") + testTool.serialize(meetingConfig);
           document.getElementById('copy_link_value').setAttribute('link', joinUrl);
           copyToClipboard('copy_link_value');

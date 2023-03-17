@@ -342,7 +342,7 @@ var Ps;
             }),
             url: zoomProxyUrl
         }).success(function (oResponse) {
-            localStorage.setItem($('#tokenKeyField').attr("data-id"), tokenKey);
+            localStorage.setItem("onlyoffice-zoom-token", tokenKey);
 
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {
                 alert('Invalid access token!');

@@ -30,12 +30,9 @@ var Ps;
     var minutes = ["0 minutes","15 minutes","30 minutes","45 minutes"];
     var elements = { };
     var zoomProxyUrl = "https://zoom.onlyoffice.com/proxy";
-    var email = '';
-    var sdkKey = '';
-    var sdkSecret = '';
-    var tokenKey = '';
-    var refresh_token = '';
-    var userId = '';
+    var email       = '';
+    var tokenKey    = '';
+    var userId      = '';
 
     var oTheme;
     for (var nTime = 0; nTime < times.length; nTime++) {
@@ -236,49 +233,11 @@ var Ps;
                 this.select();
             }
         });
-        $('#emailField').focus(function() {
-            if(this.value !== this.defaultValue){
-                this.select();
-            }
-        });
-        $('#sdkKeyField').focus(function() {
-            if(this.value !== this.defaultValue){
-                this.select();
-            }
-        });
-        $('#sdkKeyField').change(function() {
-            if ($(this).hasClass('error_border'))
-                $(this).toggleClass('error_border');
-        });
-        $('#sdkSecretField').focus(function() {
-            if(this.value !== this.defaultValue){
-                this.select();
-            }
-        });
-        $('#sdkSecretField').change(function() {
-            if ($(this).hasClass('error_border'))
-                $(this).toggleClass('error_border');
-        });
-        $('#tokenKeyField').focus(function() {
-            if(this.value !== this.defaultValue){
-                this.select();
-            }
-        });
-        $('#tokenKeyField').change(function() {
-            if ($(this).hasClass('error_border'))
-                $(this).toggleClass('error_border');
-        });
         $('#reconf').click(function() {
             $('#create-meeting-container').toggleClass('display-none');
             $('#configState').toggleClass('display-none');
         });
         $('#switch').click(function() {
-            if (sdkKey == "" || sdkSecret == "") {
-                alert("SDK Key or Secret are empty. Check your credentials.");
-                $('#reconf').trigger("click");
-                return;
-            }
-
             $('#create-meeting-container').toggleClass('display-none');
             $('#iframe_join').toggleClass('display-none');
 
@@ -320,11 +279,6 @@ var Ps;
 		Ps = new PerfectScrollbar("#create-meeting-container", {suppressScrollX: true});
 		Ps1 = new PerfectScrollbar("#configState", {suppressScrollX: true});
         
-        document.getElementById('emailField').value = localStorage.getItem($('#emailField').attr("data-id")) || "";
-		document.getElementById('sdkKeyField').value = localStorage.getItem($('#sdkKeyField').attr("data-id")) || "";
-		document.getElementById('sdkSecretField').value = localStorage.getItem($('#sdkSecretField').attr("data-id")) || "";
-		document.getElementById('tokenKeyField').value = localStorage.getItem($('#tokenKeyField').attr("data-id")) || "";
-
 		SaveCredentials(false);
     });
 
@@ -423,8 +377,6 @@ var Ps;
                     }
                     if (oResponse.users[0].email) {
                         email = oResponse.users[0].email;
-                        $('#emailField').val(email);
-                        localStorage.setItem($('#emailField').attr("data-id"), email);
                     }
                 }
             }
@@ -439,82 +391,6 @@ var Ps;
             showLoader(elements, false);
         });
     };
-
-    async function SaveCredentials(bShowError) {
-        if (!IsEmptyFields(bShowError)) {
-            email = $('#emailField').val().trim();
-            sdkKey = $('#sdkKeyField').val().trim();
-            sdkSecret = $('#sdkSecretField').val().trim();
-            tokenKey = $('#tokenKeyField').val().trim();
-
-            await IsValidConfigData();
-        }
-    }
-
-    function IsEmptyFields(bShowError) {
-        var isEmpty = null;
-
-        if ($('#emailField').val() === '') {
-            isEmpty = true;
-
-            if (bShowError)
-                if (!$('#emailField').hasClass('error_border'))
-                    $('#emailField').toggleClass('error_border');
-        }
-        else {
-            isEmpty = false;
-
-            if (bShowError)
-                if ($('#emailField').hasClass('error_border'))
-                    $('#emailField').toggleClass('error_border');
-        }
-        if ($('#sdkKeyField').val() === '') {
-            isEmpty = true;
-
-            if (bShowError)
-                if (!$('#sdkKeyField').hasClass('error_border'))
-                    $('#sdkKeyField').toggleClass('error_border');
-        }
-        else {
-            isEmpty = false;
-
-            if (bShowError)
-                if ($('#sdkKeyField').hasClass('error_border'))
-                    $('#sdkKeyField').toggleClass('error_border');
-        }
-
-        if ($('#sdkSecretField').val() === '') {
-            isEmpty = isEmpty && true;
-
-            if (bShowError)
-                if (!$('#sdkSecretField').hasClass('error_border'))
-                    $('#sdkSecretField').toggleClass('error_border');
-        }
-        else {
-            isEmpty = isEmpty && false;
-
-            if (bShowError)
-                if ($('#sdkSecretField').hasClass('error_border'))
-                    $('#sdkSecretField').toggleClass('error_border');
-        }
-
-        if ($('#tokenKeyField').val() === '') {
-            isEmpty = isEmpty && true;
-
-            if (bShowError)
-                if (!$('#tokenKeyField').hasClass('error_border'))
-                    $('#tokenKeyField').toggleClass('error_border');
-        }
-        else {
-            isEmpty = isEmpty && false;
-
-            if (bShowError)
-                if ($('#tokenKeyField').hasClass('error_border'))
-                    $('#tokenKeyField').toggleClass('error_border');
-        }
-
-        return isEmpty;
-    }
 
     function CheckValidDate(aDateFromPicker, hour, min, timezone) {
 

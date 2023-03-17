@@ -220,8 +220,6 @@ var Ps;
 		});
 
         $('#saveConfigBtn').click(function() {
-            // SaveCredentials(true);
-
             let host = window.document.location.origin + window.document.location.pathname;
             host = host.replace('index', 'oauth');
             let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=N11tS3PdQn2V8Spg6t9RKg&redirect_uri=${host}`;
@@ -278,8 +276,6 @@ var Ps;
 
 		Ps = new PerfectScrollbar("#create-meeting-container", {suppressScrollX: true});
 		Ps1 = new PerfectScrollbar("#configState", {suppressScrollX: true});
-        
-		SaveCredentials(false);
     });
 
     function CheckDuration()

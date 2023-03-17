@@ -225,7 +225,7 @@ var Ps;
             // SaveCredentials(true);
 
             let host = window.document.location.origin + window.document.location.pathname;
-            host = host.replace('index', 'oauth');
+            host = host.replace('index', 'oauth1');
             let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=qFweh7H8QaSn5eWQcxgg5w&redirect_uri=${host}`;
             
             var wnd = window.open(link, null, "width=500,height=700");

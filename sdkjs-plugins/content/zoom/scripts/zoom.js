@@ -499,7 +499,7 @@ var Ps;
             type: 'POST',
             contentType: "text/plain",
             data: JSON.stringify(jsonData),
-            url: jsonData['endPoint']
+            url: "https://api.zoom.us/v2/users/" + jsonData['endPoint']
         }).success(function (oResponse) {
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {
                 alert("Invalid access (JWT) token.");

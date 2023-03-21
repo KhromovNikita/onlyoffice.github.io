@@ -222,7 +222,7 @@ var Ps;
         $('#saveConfigBtn').click(function() {
             let host = window.document.location.origin + window.document.location.pathname;
             host = host.replace('index', 'oauth');
-            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=N11tS3PdQn2V8Spg6t9RKg&redirect_uri=${host}`;
+            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=ljv8QTyRIaBybnQst8P2w&redirect_uri=${host}`;
             
             var wnd = window.open(link, null, "width=500,height=700");
         });

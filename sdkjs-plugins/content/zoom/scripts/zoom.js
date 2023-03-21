@@ -29,7 +29,7 @@ var Ps;
     "13 hour","14 hour","15 hour","16 hour","17 hour","18 hour","19 hour","20 hour","21 hour","22 hour","23 hour","24 hour"];
     var minutes = ["0 minutes","15 minutes","30 minutes","45 minutes"];
     var elements = { };
-    var zoomProxyUrl = "http://127.0.0.1:5000/";
+    var zoomProxyUrl = "https://zoom.onlyoffice.com/proxy";
     var email       = '';
     var tokenKey    = '';
     var userId      = '';
@@ -371,9 +371,9 @@ var Ps;
                         $('#timezone').val(oResponse.users[0].timezone);
                         $('#timezone').trigger('change');
                     }
-                    if (oResponse.users[0].email) {
-                        email = oResponse.users[0].email;
-                    }
+                }
+                if (oResponse.users[0].email) {
+                    email = oResponse.users[0].email;
                 }
             }
             

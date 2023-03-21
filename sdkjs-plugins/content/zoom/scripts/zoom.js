@@ -33,6 +33,7 @@ var Ps;
     var email       = '';
     var tokenKey    = '';
     var userId      = '';
+    var redirect_uri = (window.document.location.origin + window.document.location.pathname).replace('index', 'oauth');
 
     var oTheme;
     for (var nTime = 0; nTime < times.length; nTime++) {
@@ -149,7 +150,7 @@ var Ps;
             contentType: "text/plain",
             data: JSON.stringify({
                 "code": authorizationCode,
-                "redirect_uri": "https://khromovnikita.github.io/onlyoffice.github.io/sdkjs-plugins/content/zoom/oauth.html"
+                "redirect_uri": redirect_uri
             }),
             url: "http://127.0.0.1:5000/"
         }).success(function (oResponse) {
@@ -220,11 +221,8 @@ var Ps;
 		});
 
         $('#saveConfigBtn').click(function() {
-            let host = window.document.location.origin + window.document.location.pathname;
-            host = host.replace('index', 'oauth');
             let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=sqKCq9dzSfi4toYfRd5uQw&redirect_uri=${host}`;
-            
-            var wnd = window.open(link, null, "width=500,height=700");
+            window.open(link, null, "width=500,height=700");
         });
         $('#topic-value').focus(function(){
             if(this.value !== this.defaultValue){
@@ -355,29 +353,18 @@ var Ps;
                 return;
             }
 
-            if (email !== "") {
-                if (localStorage.getItem($('#timezone').attr('data-id')) === null) {
-                    if (oResponse.timezone != "") {
-                        localStorage.setItem($('#timezone').attr('data-id'), oResponse.timezone);
-                        $('#timezone').val(oResponse.timezone);
-                        $('#timezone').trigger('change');
-                    }
+            if (localStorage.getItem($('#timezone').attr('data-id')) === null) {
+                if (oResponse.users && oResponse.users[0].timezone != "") {
+                    localStorage.setItem($('#timezone').attr('data-id'), oResponse.users[0].timezone);
+                    $('#timezone').val(oResponse.users[0].timezone);
+                    $('#timezone').trigger('change');
                 }
             }
-            else {
-                if (localStorage.getItem($('#timezone').attr('data-id')) === null) {
-                    if (oResponse.users[0].timezone != "") {
-                        localStorage.setItem($('#timezone').attr('data-id'), oResponse.users[0].timezone);
-                        $('#timezone').val(oResponse.users[0].timezone);
-                        $('#timezone').trigger('change');
-                    }
-                }
-                if (oResponse.users[0].email) {
-                    email = oResponse.users[0].email;
-                }
-            }
-            
 
+            if (email == "" && oResponse.users && oResponse.users[0].email) {
+                email = oResponse.users[0].email;
+            }
+           
             $('#configState').toggleClass('display-none');
             $('#create-meeting-container').toggleClass('display-none');
 
@@ -512,7 +499,7 @@ var Ps;
             type: 'POST',
             contentType: "text/plain",
             data: JSON.stringify(jsonData),
-            url: zoomProxyUrl
+            url: jsonData['endPoint']
         }).success(function (oResponse) {
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {
                 alert("Invalid access (JWT) token.");

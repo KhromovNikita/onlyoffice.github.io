@@ -221,7 +221,7 @@ var Ps;
 		});
 
         $('#saveConfigBtn').click(function() {
-            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=sqKCq9dzSfi4toYfRd5uQw&redirect_uri=${redirect_uri}`;
+            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=m_P9GDQ6QbieDHCiVGXPw&redirect_uri=${redirect_uri}`;
             window.open(link, null, "width=500,height=700");
         });
         $('#topic-value').focus(function(){
@@ -553,7 +553,7 @@ var Ps;
             else {
                 window.Asc.plugin.executeMethod('CoAuthoringChatSendMessage', [Asc.scope.meeting_info], function(isTrue) {
                     if (isTrue)
-                        alert('Meeting was created');
+                        alert('Meeting was created, see info in chat');
                     else
                         alert('Meeting was create, please update SDK for checking info about created meeting in chat.');
                 });

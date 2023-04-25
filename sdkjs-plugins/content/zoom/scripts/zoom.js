@@ -152,7 +152,7 @@ var Ps;
                 "code": authorizationCode,
                 "redirect_uri": redirect_uri
             }),
-            url: "http://127.0.0.1:5000/"
+            url: "https://zoom.onlyoffice.com/test"
         }).success(function (oResponse) {
             let oRes;
             try {
@@ -221,8 +221,7 @@ var Ps;
 		});
 
         $('#saveConfigBtn').click(function() {
-            // let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=m_P9GDQ6QbieDHCiVGXPw&redirect_uri=${redirect_uri}`;
-            let link = `https://zoom.us/oauth/authorize?client_id=m_P9GDQ6QbieDHCiVGXPw&response_type=code&redirect_uri=https%3A%2F%2Fkhromovnikita.github.io%2Fonlyoffice.github.io%2Fsdkjs-plugins%2Fcontent%2Fzoom%2Foauth.html`;
+            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=DolnuyZlS06lwmToTBFCQQ&redirect_uri=${redirect_uri}`;
             window.open(link, null, "width=500,height=700");
         });
         $('#topic-value').focus(function(){

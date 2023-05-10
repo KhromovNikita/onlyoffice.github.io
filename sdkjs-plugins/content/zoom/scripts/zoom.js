@@ -154,17 +154,8 @@ var Ps;
             }),
             url: "https://zoom.onlyoffice.com/test/oauth"
         }).success(function (oResponse) {
-            let oRes;
-            try {
-                oRes = JSON.parse(oResponse);
-            }
-            catch {
-                alert(oResponse);
-                return;
-            }
-
-            tokenKey = oRes["access_token"]; 
-            refresh_token = oRes["refresh_token"];
+            tokenKey = oResponse["access_token"]; 
+            refresh_token = oResponse["refresh_token"];
 
             if (tokenKey)
                 IsValidConfigData();

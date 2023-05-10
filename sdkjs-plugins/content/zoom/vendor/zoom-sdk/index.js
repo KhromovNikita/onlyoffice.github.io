@@ -1,5 +1,5 @@
 //SIGNATURE_SERVER = "https://zoom.onlyoffice.com/sign";
-SIGNATURE_SERVER = "http://127.0.0.1:5000/";
+SIGNATURE_SERVER = "https://zoom.onlyoffice.com/test/sign";
 
 window.addEventListener('DOMContentLoaded', function(event) {
   console.log('DOM fully loaded and parsed');

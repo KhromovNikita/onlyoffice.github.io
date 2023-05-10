@@ -152,7 +152,7 @@ var Ps;
                 "code": authorizationCode,
                 "redirect_uri": redirect_uri
             }),
-            url: "https://zoom.onlyoffice.com/test"
+            url: "https://zoom.onlyoffice.com/test/oauth"
         }).success(function (oResponse) {
             let oRes;
             try {

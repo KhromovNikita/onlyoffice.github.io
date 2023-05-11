@@ -358,7 +358,8 @@ var Ps;
                 return {id: index, text: user.email};
             });
             $('#user-select').select2({
-                data: aEmails
+                data: aEmails,
+                width : '100%',
             });
            
             $('#configState').toggleClass('display-none');

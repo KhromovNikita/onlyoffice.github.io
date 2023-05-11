@@ -192,7 +192,7 @@ var Ps;
         });
         $('.select_example').select2({
 			minimumResultsForSearch: Infinity,
-			width : '100%',
+			width : 'calc(100% - 24px)',
 		});
 		$('.select_example.group').select2({
 			minimumResultsForSearch: Infinity,
@@ -202,6 +202,11 @@ var Ps;
 			minimumResultsForSearch: Infinity,
 			width : '100%',
 		});
+
+        $('#user-select').select2({
+            minimumResultsForSearch: 0,
+            width : '100%'
+        });
 
 		$('#adv_settings').click(function() {
 		    $('#settings_wrapper').find('.settings_group').slideToggle('fast', function() { updateScroll(); });
@@ -356,6 +361,9 @@ var Ps;
                 data: aEmails,
                 width : '100%',
             });
+            if (aEmails.length > 1) {
+                $('#user').hide();
+            }
            
             $('#configState').toggleClass('display-none');
             $('#create-meeting-container').toggleClass('display-none');
@@ -596,6 +604,10 @@ var Ps;
 		$('#timezone').select2({
             minimumResultsForSearch: 0,
             width : 'calc(100% - 24px)'
+        });
+        $('#user-select').select2({
+            minimumResultsForSearch: 0,
+            width : '100%'
         });
 	};
 

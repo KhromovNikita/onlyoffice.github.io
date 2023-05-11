@@ -489,7 +489,7 @@ var Ps;
         jsonData["timezone"]     = sTimeZone;
         jsonData['Authorization'] = 'Bearer ' + tokenKey;
         jsonData['method'] = 'POST';
-        jsonData['endPoint'] = $('#user-select').select2('data').text + '/meetings';
+        jsonData['endPoint'] = $('#user-select').select2('data')[0].text + '/meetings';
 
         $.ajax({
             type: 'POST',

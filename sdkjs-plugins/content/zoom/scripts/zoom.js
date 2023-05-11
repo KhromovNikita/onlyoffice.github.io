@@ -207,6 +207,10 @@ var Ps;
             minimumResultsForSearch: 0,
             width : 'calc(100% - 24px)'
         });
+        $('#user-select').select2({
+            minimumResultsForSearch: 0,
+            width : '100%'
+        });
 
 		$('#adv_settings').click(function() {
 		    $('#settings_wrapper').find('.settings_group').slideToggle('fast', function() { updateScroll(); });

@@ -361,7 +361,7 @@ var Ps;
                 data: aEmails,
                 width : '100%',
             });
-            if (aEmails.length > 1) {
+            if (aEmails.length == 1) {
                 $('#user').hide();
             }
            

@@ -30,6 +30,7 @@ var Ps;
     var minutes = ["0 minutes","15 minutes","30 minutes","45 minutes"];
     var elements = { };
     var zoomProxyUrl = "https://zoom.onlyoffice.com/proxy";
+    var aEmails     = [];
     var email       = '';
     var tokenKey    = '';
     var userId      = '';
@@ -145,6 +146,7 @@ var Ps;
     };
 
     function GetAccessToken(authorizationCode) {
+        showLoader(elements, true);
         $.ajax({
             method: 'POST',
             contentType: "text/plain",
@@ -162,6 +164,7 @@ var Ps;
 
         }).error(function(e){
             console.log(e);
+            showLoader(elements, false);
         });
     }
 
@@ -320,13 +323,11 @@ var Ps;
     }
 
     async function IsValidConfigData() {
-        showLoader(elements, true);
         $.ajax({
             method: 'POST',
             contentType: "text/plain",
             data: JSON.stringify({
                 'Authorization': 'Bearer ' + tokenKey,
-                'endPoint': email,
                 "method": "GET"
             }),
             url: zoomProxyUrl
@@ -352,9 +353,12 @@ var Ps;
                 }
             }
 
-            if (email == "" && oResponse.users && oResponse.users[0].email) {
-                email = oResponse.users[0].email;
-            }
+            aEmails = oResponse.users.map(function(user, index) {
+                return {id: index, text: user.email};
+            });
+            $('#user-select').select2({
+                data: aEmails
+            });
            
             $('#configState').toggleClass('display-none');
             $('#create-meeting-container').toggleClass('display-none');
@@ -484,7 +488,7 @@ var Ps;
         jsonData["timezone"]     = sTimeZone;
         jsonData['Authorization'] = 'Bearer ' + tokenKey;
         jsonData['method'] = 'POST';
-        jsonData['endPoint'] = email + '/meetings';
+        jsonData['endPoint'] = $('#user-select').val() + '/meetings';
 
         $.ajax({
             type: 'POST',

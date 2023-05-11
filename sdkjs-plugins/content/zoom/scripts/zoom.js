@@ -533,7 +533,7 @@ var Ps;
                 sTime     = 'Time: ' + $('#date-value').val() + ' ' + $('#time-hour').val() + ' ' + $('#time-am-pm').val().toUpperCase() + ' ' + oResponse["timezone"];
             var sJoinUrl  = 'Join URL: ' + oResponse.join_url;
             var sConfId   = 'Conference ID: ' + oResponse.id;
-            var sPassword = 'Password: ' + oResponse.password;
+            var sPassword = 'Password: ' + oResponse.password ? oResponse.password : "—";
             var sResult   = sTopic + '\r' + sTime + '\r' + sJoinUrl +'\r' + sConfId + '\r' + sPassword + '\r';
 
             Asc.scope.meeting_info = sResult;

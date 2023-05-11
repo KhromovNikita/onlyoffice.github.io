@@ -328,7 +328,8 @@ var Ps;
             contentType: "text/plain",
             data: JSON.stringify({
                 'Authorization': 'Bearer ' + tokenKey,
-                "method": "GET"
+                "method": "GET",
+                "email": ''
             }),
             url: zoomProxyUrl
         }).success(function (oResponse) {

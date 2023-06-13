@@ -333,7 +333,6 @@ var Ps;
             }),
             url: sProxyURL
         }).success(function (oResponse) {
-            oResponse = JSON.parse(oResponse);
 			localStorage.setItem("onlyoffice-zoom-token", tokenKey);
 
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {

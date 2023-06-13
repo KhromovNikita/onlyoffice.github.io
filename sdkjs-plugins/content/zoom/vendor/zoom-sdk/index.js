@@ -1,6 +1,4 @@
-//SIGNATURE_SERVER = "https://zoom.onlyoffice.com/sign";
-SIGNATURE_SERVER = "https://zoom.onlyoffice.com/test/sign";
-//SIGNATURE_SERVER = "http://127.0.0.1:5000";
+SIGNATURE_SERVER = "https://plugins-services.onlyoffice.com/zoom/sign";
 
 window.addEventListener('DOMContentLoaded', function(event) {
   console.log('DOM fully loaded and parsed');
@@ -114,6 +112,13 @@ function websdkready() {
       testTool.setCookie("meeting_number", meetingConfig.mn);
       testTool.setCookie("meeting_pwd", meetingConfig.pwd);
 
+    //const iat = Math.round(new Date().getTime() / 1000) - (new Date()).getTimezoneOffset() * 60 - 30;
+    //const iat = 1683819574;
+    //const exp = iat + 60 * 60 * 2;
+    //const exp = 1683826774;
+    //console.log(iat);
+    //console.log(exp);
+    
       $.ajax({
           method: 'POST',
           contentType: "text/plain",
@@ -121,6 +126,8 @@ function websdkready() {
           data: JSON.stringify({
             'meet_number': meetingConfig.mn,
             'role_id': meetingConfig.role,
+            //'iat': iat,
+            //'exp': exp
           }),
           url: SIGNATURE_SERVER
 

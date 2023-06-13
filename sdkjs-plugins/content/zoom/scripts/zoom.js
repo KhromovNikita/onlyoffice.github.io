@@ -29,11 +29,9 @@ var Ps;
     "13 hour","14 hour","15 hour","16 hour","17 hour","18 hour","19 hour","20 hour","21 hour","22 hour","23 hour","24 hour"];
     var minutes = ["0 minutes","15 minutes","30 minutes","45 minutes"];
     var elements = { };
-    var zoomProxyUrl = "https://zoom.onlyoffice.com/proxy";
+    var sProxyURL = "https://plugins-services.onlyoffice.com/proxy";
     var aEmails     = [];
-    var email       = '';
     var tokenKey    = '';
-    var userId      = '';
     var redirect_uri = (window.document.location.origin + window.document.location.pathname).replace('index', 'oauth');
 
     var oTheme;
@@ -154,7 +152,7 @@ var Ps;
                 "code": authorizationCode,
                 "redirect_uri": redirect_uri
             }),
-            url: "https://zoom.onlyoffice.com/test/oauth"
+            url: "https://plugins-services.onlyoffice.com/zoom/oauth"
         }).success(function (oResponse) {
             tokenKey = oResponse["access_token"]; 
             refresh_token = oResponse["refresh_token"];
@@ -321,19 +319,22 @@ var Ps;
             $('#recurring-conf').trigger('change');
         }
     }
-
+    
     async function IsValidConfigData() {
         $.ajax({
             method: 'POST',
             contentType: "text/plain",
             data: JSON.stringify({
-                'Authorization': 'Bearer ' + tokenKey,
+                "headers": {
+                    'Authorization': 'Bearer ' + tokenKey,
+                },
                 "method": "GET",
-                'endPoint': ''
+                "target": "https://api.zoom.us/v2/users/"
             }),
-            url: zoomProxyUrl
+            url: sProxyURL
         }).success(function (oResponse) {
-            localStorage.setItem("onlyoffice-zoom-token", tokenKey);
+            oResponse = JSON.parse(oResponse);
+			localStorage.setItem("onlyoffice-zoom-token", tokenKey);
 
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {
                 alert('Invalid access token!');
@@ -491,15 +492,19 @@ var Ps;
         }
 
         jsonData["timezone"]     = sTimeZone;
-        jsonData['Authorization'] = 'Bearer ' + tokenKey;
-        jsonData['method'] = 'POST';
-        jsonData['endPoint'] = $('#user-select').select2('data')[0].text + '/meetings';
 
         $.ajax({
             type: 'POST',
             contentType: "text/plain",
-            data: JSON.stringify(jsonData),
-            url: zoomProxyUrl
+            data: JSON.stringify({
+                "headers": {
+                    "Authorization": 'Bearer ' + tokenKey
+                },
+                "data": JSON.stringify(jsonData),
+                "method": "POST",
+                "target": "https://api.zoom.us/v2/users/" + $('#user-select').select2('data')[0].text + '/meetings'
+            }),
+            url: sProxyURL
         }).success(function (oResponse) {
             if (oResponse.message && oResponse.message.search("Invalid") != -1) {
                 alert("Invalid access (JWT) token.");

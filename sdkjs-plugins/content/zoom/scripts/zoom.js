@@ -497,7 +497,8 @@ var Ps;
             contentType: "text/plain",
             data: JSON.stringify({
                 "headers": {
-                    "Authorization": 'Bearer ' + tokenKey
+                    "Authorization": 'Bearer ' + tokenKey,
+                    "Content-Type": 'application/json'
                 },
                 "data": JSON.stringify(jsonData),
                 "method": "POST",

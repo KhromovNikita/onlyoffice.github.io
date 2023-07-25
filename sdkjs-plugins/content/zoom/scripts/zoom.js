@@ -346,7 +346,7 @@ var Ps;
                 return;
             }
             else if (oResponse.message && oResponse.code == 403) {
-                alert(oResponse.message);
+                alert(oResponse.message + "\nRemove app here 'https://marketplace.zoom.us/user/installed' and try again\nDon't forget set checked option 'Allow this app to use my shared access permissions.'");
                 showLoader(elements, false);
                 return;
             }

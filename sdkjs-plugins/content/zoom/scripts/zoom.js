@@ -345,6 +345,11 @@ var Ps;
                 showLoader(elements, false);
                 return;
             }
+            else if (oResponse.message && oResponse.code == 403) {
+                alert(oResponse.message);
+                showLoader(elements, false);
+                return;
+            }
 
             if (localStorage.getItem($('#timezone').attr('data-id')) === null) {
                 if (oResponse.users && oResponse.users[0].timezone != "") {

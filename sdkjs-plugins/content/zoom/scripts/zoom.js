@@ -329,7 +329,7 @@ var Ps;
                     'Authorization': 'Bearer ' + tokenKey,
                 },
                 "method": "GET",
-                "target": "https://api.zoom.us/v2/users/"
+                "target": "https://api.zoom.us/v2/users/me"
             }),
             url: sProxyURL
         }).success(function (oResponse) {
@@ -359,9 +359,15 @@ var Ps;
                 }
             }
 
-            aEmails = oResponse.users.map(function(user, index) {
-                return {id: index, text: user.email};
-            });
+            if (oResponse.users) {
+                aEmails = oResponse.users.map(function(user, index) {
+                    return {id: index, text: user.email};
+                });
+            }
+            else {
+                aEmails = [{id: 0, text: oResponse.email}]
+            }
+
             $('#user-select').select2({
                 data: aEmails,
                 width : '100%',

@@ -213,7 +213,7 @@ var Ps;
 		});
 
         $('#saveConfigBtn').click(function() {
-            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=fHgWIM9nR22ZmintDAetA&redirect_uri=${redirect_uri}`;
+            let link = `https://zoom.us/oauth/authorize?response_type=code&client_id=9lWhDa8ZRr6OCGA9WFsZaw&redirect_uri=${redirect_uri}`;
             window.open(link, null, "width=500,height=700");
         });
         $('#topic-value').focus(function(){
